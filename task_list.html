@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <title>tasks</title>
+        <style>
+            table,tr,th,td{
+                border:1px solid black;
+                border-collapse:collapse;
+            }
+        </style>
+    </head>
+    <body>
+        <button><a href="{% url 'add_task' %}">Add task</a></button>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            {% for task in tasks %}
+            <tr>
+                <td>{{task.title}}</td>
+                <td>{{task.description}}</td>
+                <td>{{task.priority}}</td>
+                <td>{{task.status}}</td>
+                <td><a href="{% url 'update_task' task.id %}">update</a></td>
+                <td><a href="{% url 'delete_task' task.id %}">delete</a></td>
+                
+            </tr>
+            {% empty %}
+            <tr colspan="6">
+                <td>NO task </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <h2>Filter by Priority</h2>
+        <form >
+        <label>
+            <input type="radio" name="priority" value="High"> <a href="{% url 'priority' 'High' %}">High</a>
+        </label><br>
+
+        <label>
+            <input type="radio" name="priority" value="Medium"><a href="{% url 'priority' 'Medium' %}"> Medium</a>
+        </label><br>
+
+        <label>
+            <input type="radio" name="priority" value="Low"> <a href="{% url 'priority' 'Low' %}">Low</a>
+        </label><br>
+
+        
+    </form>
+
+    <button><a href="{% url 'task_list' %}">Back</a></button>
+
+    </body>
+</html>
